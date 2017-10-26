@@ -42,12 +42,5 @@ public class StudentMapperTest {
         }
     }
 
-    @Test
-    public void  findALL() {
 
-        List<Student> studentList = studentMapper.findALL();
-
-        System.out.println(studentList.size());
-
-    }
 }

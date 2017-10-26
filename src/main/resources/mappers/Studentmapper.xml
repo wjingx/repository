@@ -36,9 +36,7 @@
 	student.stud_id = #{studId}
     </select>
 
-    <select id="findALL" resultType="student" >
-      SELECT  * from student
-    </select>
+
 
 
 </mapper>    
