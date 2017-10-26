@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mappers.StudentMapper">
+
+<resultMap id="baseMap" type="student">
+    <id column="stud_id" property="studId"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="dob" property="dob"/>
+</resultMap>
+
+    <resultMap id="studentMap" type="student" extends="baseMap">
+
+        <collection property="deptList" ofType="dept">
+          <id column="deptId" property="id"/>
+          <result column="descript" property="descript"/>
+      </collection>
+
+    </resultMap>
+
+    <select id="findByIdWithDept" resultType="student" resultMap="studentMap">
+      SELECT
+            stud_id,
+            name,
+            email,
+            dob,
+            dept.id as deptId,
+            descript
+        FROM
+            student
+        INNER JOIN stud_dept ON student.stud_id = stud_dept.sid
+        INNER JOIN dept ON dept.id = stud_dept.did
+        WHERE
+	student.stud_id = #{studId}
+    </select>
+
+    <select id="findALL" resultType="student" >
+      SELECT  * from student
+    </select>
+
+
+</mapper>    
